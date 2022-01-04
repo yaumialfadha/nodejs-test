@@ -23,8 +23,9 @@ jobs:
     - name: npm install, build and test
       run: |
         npm install
-        npm run build --if-present
-        
+        npm run build --if-
+        npm test
+
   build-push-gcr:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
