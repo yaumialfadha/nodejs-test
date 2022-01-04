@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main ]
 jobs:
-  build:
+
+  nodejs:
 
     runs-on: ubuntu-latest
 
@@ -23,8 +24,16 @@ jobs:
     - name: npm install, build and test
       run: |
         npm install
-        npm run build --if-
-        npm test
+        npm run build --if-present
+
+  build:
+    needs: [nodejs]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
   build-push-gcr:
     name: Build and Push to GCP
